@@ -73,7 +73,7 @@ On Windows, use `gradlew.bat build`. The JAR is written to `build/libs/FancyNpcs
 
 ## Development
 
-This project was developed by Veloraxx with assistance from AI tools, including OpenAI Codex.
+This project was developed by Veloraxx with assistance from AI tools.
 
 ## License
 
