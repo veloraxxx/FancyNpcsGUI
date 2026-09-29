@@ -38,7 +38,7 @@ public final class FancyNpcsGuiPlugin extends JavaPlugin {
             command.setExecutor((sender, ignored, label, args) -> {
                 if (!(sender instanceof Player player)) {
                     sender.sendMessage("This command is for players.");
-                } else if (!player.hasPermission("fancynpcsgui.admin") || !player.hasPermission("fancynpcsgui.use")) {
+                } else if (!player.hasPermission("fancynpcsgui.use")) {
                     player.sendMessage("You do not have permission to manage NPCs.");
                 } else if (!bridge.ready()) {
                     player.sendMessage("FancyNpcs is still loading its NPCs. Try again shortly.");

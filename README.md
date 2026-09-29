@@ -24,7 +24,7 @@ https://github.com/user-attachments/assets/4da70d60-f1d6-4367-be25-2506029c9b22
 
 | Component | Version |
 | --- | --- |
-| FancyNpcsGUI | 1.0.0 |
+| FancyNpcsGUI | 1.0.1 |
 | Minecraft / Paper | 1.21.6–1.21.11 (expected); tested on 1.21.11 |
 | FancyNpcs | [2.12.1](https://modrinth.com/plugin/fancynpcs/version/2.12.1), required |
 | Server Java | 25 or newer, required by FancyNpcs 2.12.1 |
@@ -37,7 +37,7 @@ FancySitula is supplied by FancyNpcs; it does not need a separate installation. 
 
 1. Set up a Paper 1.21.11 server with Java 25 or newer.
 2. Install FancyNpcs 2.12.1.
-3. Download `FancyNpcsGUI-1.0.0.jar` from the [release](https://github.com/veloraxxx/FancyNpcsGUI/releases/tag/v1.0.0) and place it in `plugins/`.
+3. Download `FancyNpcsGUI-1.0.1.jar` from the [release](https://github.com/veloraxxx/FancyNpcsGUI/releases/tag/v1.0.1) and place it in `plugins/`.
 4. Restart the server.
 
 ## Usage
@@ -46,18 +46,18 @@ Run `/npcgui` to open the browser, or sneak + right-click an NPC to open its edi
 
 Text fields use chat input. Type `cancel` to return without changing the value; input expires after 60 seconds. Display names accept `\n` for a new line and `@none` to hide the name, including through `/npc displayname`.
 
-All permissions default to operators. GUI access requires both `fancynpcsgui.admin` and `fancynpcsgui.use`; `admin` does not grant the other permissions automatically.
+All permissions default to operators. Grant `fancynpcsgui.admin` for full access, or combine `fancynpcsgui.use` with the individual permissions below. `use` alone allows browsing NPCs and viewing their settings without changing them.
 
 | Permission | Allows |
 | --- | --- |
-| `fancynpcsgui.admin` | Access to the administration GUI, together with `use` |
-| `fancynpcsgui.use` | Running `/npcgui` and using its menus, together with `admin` |
+| `fancynpcsgui.admin` | All permissions below |
+| `fancynpcsgui.use` | Opening `/npcgui`, browsing NPCs and viewing settings |
 | `fancynpcsgui.create` | Creating and duplicating NPCs |
-| `fancynpcsgui.edit` | Editing settings and equipment, teleporting, and the sneak-click shortcut |
+| `fancynpcsgui.edit` | Editing settings, skins and equipment, teleporting, and the sneak-click shortcut |
 | `fancynpcsgui.delete` | Deleting NPCs |
 | `fancynpcsgui.actions` | Managing interaction actions |
 
-Skin changes and duplication also require FancyNpcs' own `fancynpcs.command.npc.skin` and `fancynpcs.command.npc.copy` permissions respectively.
+`create` also grants FancyNpcs' `fancynpcs.command.npc.copy` permission, and `edit` grants `fancynpcs.command.npc.skin`. These allow the corresponding native FancyNpcs commands as well. Both are included in `admin`.
 
 ## Building
 
@@ -69,7 +69,7 @@ cd FancyNpcsGUI
 ./gradlew build
 ```
 
-On Windows, use `gradlew.bat build`. The JAR is written to `build/libs/FancyNpcsGUI-1.0.0.jar`.
+On Windows, use `gradlew.bat build`. The JAR is written to `build/libs/FancyNpcsGUI-1.0.1.jar`.
 
 ## Development
 

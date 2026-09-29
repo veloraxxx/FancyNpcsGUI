@@ -54,7 +54,7 @@ public final class ChatInputManager implements Listener {
         String value = PlainTextComponentSerializer.plainText().serialize(event.originalMessage()).trim();
         Bukkit.getScheduler().runTask(plugin, () -> {
             if (sessions.get(player.getUniqueId()) != session || !player.isOnline()) return;
-            if (!player.hasPermission("fancynpcsgui.admin") || !player.hasPermission("fancynpcsgui.use")) {
+            if (!player.hasPermission("fancynpcsgui.use")) {
                 cancel(player.getUniqueId());
                 return;
             }

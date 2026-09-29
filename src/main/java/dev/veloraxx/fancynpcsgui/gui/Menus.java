@@ -153,6 +153,7 @@ public final class Menus implements Listener {
         Menu menu = menu("Appearance · " + data.getName(), 36);
         menu.button(10, Material.NAME_TAG, "Display name", "Current: " + shortText(data.getDisplayName().replace("\n", "\\n")), "MiniMessage and \\n supported; @none clears", c -> edit(player, () ->
                 input.ask(player, "Enter a display name (\\n for a new line), or @none to hide it:", value -> {
+                    if (!player.hasPermission("fancynpcsgui.edit")) return "You no longer have permission to edit NPCs.";
                     String error = change(id, n -> n.getData().setDisplayName(value.equalsIgnoreCase("@none") ? "<empty>" : value.replace("\\n", "\n")));
                     if (error == null) feedback(player, "Display name updated.");
                     return error;
@@ -204,6 +205,7 @@ public final class Menus implements Listener {
 
     private void skinInput(Player player, String id, String format, String prefix, boolean slim) {
         edit(player, () -> input.ask(player, "Enter skin " + format + ":", value -> {
+            if (!player.hasPermission("fancynpcsgui.edit")) return "You no longer have permission to edit NPCs.";
             if (value.isBlank() || value.contains(" ") || value.contains("\n")) return "Use one non-empty value without spaces.";
             if (format.equals("UUID")) try { java.util.UUID.fromString(value); } catch (IllegalArgumentException ex) { return "Invalid UUID."; }
             if (format.equals("URL") && !(value.startsWith("https://") || value.startsWith("http://"))) return "Use an HTTP or HTTPS URL.";
@@ -342,6 +344,7 @@ public final class Menus implements Listener {
         }, player, () -> position(player, id)));
         menu.button(24, Material.WRITABLE_BOOK, "Exact XYZ", "Enter x y z in the same world", c -> edit(player, () ->
                 input.ask(player, "Enter x y z separated by spaces:", value -> {
+                    if (!player.hasPermission("fancynpcsgui.edit")) return "You no longer have permission to edit NPCs.";
                     String[] parts = value.split("\\s+");
                     if (parts.length != 3) return "Enter exactly three numbers.";
                     try {
@@ -356,6 +359,7 @@ public final class Menus implements Listener {
                 }, () -> position(player, id))));
         menu.button(25, Material.CLOCK, "Exact yaw / pitch", "Enter yaw pitch in degrees", c -> edit(player, () ->
                 input.ask(player, "Enter yaw pitch separated by a space:", value -> {
+                    if (!player.hasPermission("fancynpcsgui.edit")) return "You no longer have permission to edit NPCs.";
                     String[] parts = value.split("\\s+");
                     if (parts.length != 2) return "Enter exactly two numbers.";
                     try {
@@ -435,6 +439,7 @@ public final class Menus implements Listener {
         if (current > 0) menu.button(navigation, Material.ARROW, "Previous page", "", c -> attributeValues(player, id, attribute, current - 1, attributePage));
         menu.button(navigation + 2, Material.WRITABLE_BOOK, "Enter value", "Use a valid FancyNpcs value", c -> edit(player, () ->
                 input.ask(player, "Enter " + attribute.getName() + " value:", value -> {
+                    if (!player.hasPermission("fancynpcsgui.edit")) return "You no longer have permission to edit NPCs.";
                     if (!attribute.isValidValue(value)) return "FancyNpcs does not accept that value.";
                     return change(id, n -> bridge.attribute(n, attribute, value));
                 }, () -> attributes(player, id, attributePage))));
@@ -449,6 +454,7 @@ public final class Menus implements Listener {
         Menu menu = menu("Management", 27);
         menu.button(11, Material.CHEST, "Duplicate NPC", "Ask for a new internal name", c -> guard(player, "create", () ->
                 input.ask(player, "Enter a unique name for the copy:", name -> {
+                    if (!player.hasPermission("fancynpcsgui.create")) return "You no longer have permission to create NPCs.";
                     if (!bridge.nameAvailable(name)) return "Invalid or already used NPC name.";
                     Npc live = bridge.find(id);
                     if (live == null) return "NPC was removed.";
@@ -671,6 +677,7 @@ public final class Menus implements Listener {
 
     private void number(Player player, String id, String prompt, Function<Double, String> apply, Runnable back) {
         input.ask(player, prompt, raw -> {
+            if (!player.hasPermission("fancynpcsgui.edit")) return "You no longer have permission to edit NPCs.";
             try {
                 double value = Double.parseDouble(raw);
                 if (!Double.isFinite(value)) return "Enter a finite number.";
@@ -706,7 +713,7 @@ public final class Menus implements Listener {
     }
 
     private void guard(Player player, String permission, Runnable action) {
-        if (!player.hasPermission("fancynpcsgui.admin") || !player.hasPermission("fancynpcsgui." + permission)) {
+        if (!player.hasPermission("fancynpcsgui.use") || !player.hasPermission("fancynpcsgui." + permission)) {
             player.sendMessage("You do not have permission for this operation.");
             return;
         }
@@ -809,7 +816,7 @@ public final class Menus implements Listener {
         Consumer<InventoryClickEvent> handler = menu.handlers.get(event.getRawSlot());
         if (handler != null) Bukkit.getScheduler().runTask(plugin, () -> {
             if (!player.isOnline() || player.getOpenInventory().getTopInventory() != menu.inventory) return;
-            if (!player.hasPermission("fancynpcsgui.admin") || !player.hasPermission("fancynpcsgui.use")) {
+            if (!player.hasPermission("fancynpcsgui.use")) {
                 player.closeInventory();
                 return;
             }
@@ -821,7 +828,7 @@ public final class Menus implements Listener {
     public void onNpcClick(NpcPreInteractEvent event) {
         Player player = event.getPlayer();
         if (event.getInteractionType() != ActionTrigger.RIGHT_CLICK || !player.isSneaking()
-                || !bridge.editorShortcut(event.getNpc()) || !player.hasPermission("fancynpcsgui.admin")
+                || !bridge.editorShortcut(event.getNpc())
                 || !player.hasPermission("fancynpcsgui.use") || !player.hasPermission("fancynpcsgui.edit")) return;
         event.setCancelled(true);
         String id = event.getNpc().getData().getId();

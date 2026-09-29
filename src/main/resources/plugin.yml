@@ -1,5 +1,5 @@
 name: FancyNpcsGUI
-version: 1.0.0
+version: 1.0.1
 main: dev.veloraxx.fancynpcsgui.FancyNpcsGuiPlugin
 api-version: '1.21'
 author: Veloraxx
@@ -12,14 +12,24 @@ commands:
     permission: fancynpcsgui.use
 permissions:
   fancynpcsgui.admin:
-    description: Grants access to the NPC administration GUI
+    description: Grants all NPC GUI permissions
     default: op
+    children:
+      fancynpcsgui.use: true
+      fancynpcsgui.create: true
+      fancynpcsgui.edit: true
+      fancynpcsgui.delete: true
+      fancynpcsgui.actions: true
   fancynpcsgui.use:
     default: op
   fancynpcsgui.create:
     default: op
+    children:
+      fancynpcs.command.npc.copy: true
   fancynpcsgui.edit:
     default: op
+    children:
+      fancynpcs.command.npc.skin: true
   fancynpcsgui.delete:
     default: op
   fancynpcsgui.actions:
