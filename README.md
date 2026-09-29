@@ -18,7 +18,7 @@ An in-game editor for [FancyNpcs](https://modrinth.com/plugin/fancynpcs). Browse
 
 ## Showcase
 
-[Watch the showcase](https://github.com/veloraxxx/FancyNpcsGUI/releases/download/v1.0.0/showcase.mp4). The clip is attached to the release rather than stored in Git.
+https://github.com/user-attachments/assets/4da70d60-f1d6-4367-be25-2506029c9b22
 
 ## Requirements
 
