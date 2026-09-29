@@ -25,11 +25,11 @@ https://github.com/user-attachments/assets/4da70d60-f1d6-4367-be25-2506029c9b22
 | Component | Version |
 | --- | --- |
 | FancyNpcsGUI | 1.0.0 |
-| Minecraft / Paper | 1.21.11, the development target |
+| Minecraft / Paper | 1.21.11 |
 | FancyNpcs | [2.12.1](https://modrinth.com/plugin/fancynpcs/version/2.12.1), required |
 | Server Java | 25 or newer, required by FancyNpcs 2.12.1 |
 
-The build is verified against Paper 1.21.11 and FancyNpcs 2.12.1. A complete in-game compatibility test is still pending. Other Minecraft versions and other FancyNpcs versions have not been verified. Spigot and Folia are not supported by this addon.
+Expected to work on Paper 1.21.11 with FancyNpcs 2.12.1 and Java 25 or newer. The build is verified against these API versions. Compatibility with other Minecraft or FancyNpcs versions is unverified and may be tested in the future. Spigot and Folia are not supported by this addon.
 
 FancySitula is supplied by FancyNpcs; it does not need a separate installation. There are no other required plugins.
 
