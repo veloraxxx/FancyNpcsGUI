@@ -56,6 +56,8 @@ Give `fancynpcsgui.admin` for full access. It includes `use` and all the other p
 
 For limited access, give `fancynpcsgui.use` **plus** the permissions you want. `create`, `edit`, `delete` and `actions` each need `use` to work in the GUI. `use` on its own only lets players browse NPCs and view settings.
 
+Operators have all permissions by default. `create` and `edit` also grant FancyNpcs' copy and skin command permissions, respectively.
+
 | Permission | What it does | Also needs |
 | --- | --- | --- |
 | `fancynpcsgui.admin` | Everything below | — |
@@ -64,10 +66,6 @@ For limited access, give `fancynpcsgui.use` **plus** the permissions you want. `
 | `fancynpcsgui.edit` | Edit settings, skins and equipment; teleport; use the sneak-click shortcut | `use` |
 | `fancynpcsgui.delete` | Delete NPCs | `use` |
 | `fancynpcsgui.actions` | Add, edit, remove and reorder actions | `use` |
-
-For example, `fancynpcsgui.use` + `fancynpcsgui.edit` lets a player edit existing NPCs, but doesn't let them create or delete NPCs or change actions.
-
-`create` also gives `fancynpcs.command.npc.copy`, and `edit` gives `fancynpcs.command.npc.skin`. Those permissions also allow FancyNpcs' own copy and skin commands. Operators have all permissions by default.
 
 ## Building
 
