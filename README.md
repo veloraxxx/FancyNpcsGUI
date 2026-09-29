@@ -1,20 +1,22 @@
 # FancyNpcsGUI
 
-An in-game editor for [FancyNpcs](https://modrinth.com/plugin/fancynpcs). Browse, create and edit NPCs through inventory menus instead of using a command for every setting. Made by Veloraxx; this is an independent addon, not an official FancyInnovations project.
+A GUI for [FancyNpcs](https://modrinth.com/plugin/fancynpcs). Open `/npcgui` to find, create and edit NPCs in-game.
+
+Made by Veloraxx. This is an unofficial addon for FancyNpcs.
 
 ![NPC editor overview](assets/editor-overview.png)
 
 ## Features
 
-- NPC browser with search, teleporting, creation, duplication and deletion
-- Display names with MiniMessage formatting, `\n` line breaks and a background toggle
-- Player skins, skin mirroring and NPC skin previews in the menus
-- Entity type, scale, glow and glow color settings
-- Equipment editing for both hands and all four armor slots
-- Turn-to-player, collision, visibility modes, viewing distance and interaction cooldown
-- Position, rotation and entity-specific attributes
-- Left-click, right-click and shared action chains, including editing, removal and reordering
-- Sneak + right-click to open an NPC's editor, enabled by default
+- Search, create, copy and delete NPCs, or teleport to them
+- Set display names with MiniMessage, `\n` line breaks and an optional background
+- Change skins, mirror a player's skin and see skin previews in the GUI
+- Change entity type, size, glow and glow color
+- Equip both hands and all four armor slots
+- Set visibility, viewing distance, collision, turn-to-player and click cooldown
+- Edit position, rotation and entity attributes
+- Add, edit and reorder left-click, right-click and shared actions
+- Sneak + right-click an NPC to open its editor (enabled by default)
 
 ## Showcase
 
@@ -25,13 +27,13 @@ https://github.com/user-attachments/assets/4da70d60-f1d6-4367-be25-2506029c9b22
 | Component | Version |
 | --- | --- |
 | FancyNpcsGUI | 1.0.1 |
-| Minecraft / Paper | 1.21.6–1.21.11 (expected); tested on 1.21.11 |
-| FancyNpcs | [2.12.1](https://modrinth.com/plugin/fancynpcs/version/2.12.1), required |
-| Server Java | 25 or newer, required by FancyNpcs 2.12.1 |
+| Minecraft / Paper | 1.21.6–1.21.11 (expected) |
+| FancyNpcs | [2.12.1](https://modrinth.com/plugin/fancynpcs/version/2.12.1) |
+| Server Java | 25 or newer |
 
-Tested on Paper 1.21.11 with FancyNpcs 2.12.1. Expected to work on Paper 1.21.6–1.21.11 with FancyNpcs 2.12.1 and Java 25 or newer. Spigot and Folia are not supported by this addon.
+Tested on Paper 1.21.11 with FancyNpcs 2.12.1. Expected to work on Paper 1.21.6–1.21.11. Spigot and Folia are not supported.
 
-FancySitula is supplied by FancyNpcs; it does not need a separate installation. There are no other required plugins.
+FancyNpcs 2.12.1 requires Java 25 or newer. It includes FancySitula, so you only need to install FancyNpcs and this addon.
 
 ## Installation
 
@@ -44,24 +46,32 @@ FancySitula is supplied by FancyNpcs; it does not need a separate installation. 
 
 Run `/npcgui` to open the browser, or sneak + right-click an NPC to open its editor. The shortcut can be disabled for each NPC under Behaviour.
 
-Text fields use chat input. Type `cancel` to return without changing the value; input expires after 60 seconds. Display names accept `\n` for a new line and `@none` to hide the name, including through `/npc displayname`.
+When a menu asks for text or a number, enter it in chat. Type `cancel` to go back. The prompt times out after 60 seconds.
 
-All permissions default to operators. Grant `fancynpcsgui.admin` for full access, or combine `fancynpcsgui.use` with the individual permissions below. `use` alone allows browsing NPCs and viewing their settings without changing them.
+Display names accept `\n` for line breaks and `@none` to hide the name. This works in the GUI and with `/npc displayname`.
 
-| Permission | Allows |
-| --- | --- |
-| `fancynpcsgui.admin` | All permissions below |
-| `fancynpcsgui.use` | Opening `/npcgui`, browsing NPCs and viewing settings |
-| `fancynpcsgui.create` | Creating and duplicating NPCs |
-| `fancynpcsgui.edit` | Editing settings, skins and equipment, teleporting, and the sneak-click shortcut |
-| `fancynpcsgui.delete` | Deleting NPCs |
-| `fancynpcsgui.actions` | Managing interaction actions |
+## Permissions
 
-`create` also grants FancyNpcs' `fancynpcs.command.npc.copy` permission, and `edit` grants `fancynpcs.command.npc.skin`. These allow the corresponding native FancyNpcs commands as well. Both are included in `admin`.
+Give `fancynpcsgui.admin` for full access. It includes `use` and all the other permissions below.
+
+For limited access, give `fancynpcsgui.use` **plus** the permissions you want. `create`, `edit`, `delete` and `actions` each need `use` to work in the GUI. `use` on its own only lets players browse NPCs and view settings.
+
+| Permission | What it does | Also needs |
+| --- | --- | --- |
+| `fancynpcsgui.admin` | Everything below | — |
+| `fancynpcsgui.use` | Open `/npcgui` and view NPC settings | — |
+| `fancynpcsgui.create` | Create and copy NPCs | `use` |
+| `fancynpcsgui.edit` | Edit settings, skins and equipment; teleport; use the sneak-click shortcut | `use` |
+| `fancynpcsgui.delete` | Delete NPCs | `use` |
+| `fancynpcsgui.actions` | Add, edit, remove and reorder actions | `use` |
+
+For example, `fancynpcsgui.use` + `fancynpcsgui.edit` lets a player edit existing NPCs, but doesn't let them create or delete NPCs or change actions.
+
+`create` also gives `fancynpcs.command.npc.copy`, and `edit` gives `fancynpcs.command.npc.skin`. Those permissions also allow FancyNpcs' own copy and skin commands. Operators have all permissions by default.
 
 ## Building
 
-Install JDK 26. The Gradle wrapper uses Gradle 9.6.0 and downloads the compile-time dependencies.
+Use JDK 26. The included Gradle 9.6.0 wrapper downloads the dependencies.
 
 ```sh
 git clone https://github.com/veloraxxx/FancyNpcsGUI.git
@@ -77,4 +87,4 @@ This project was developed by Veloraxx with assistance from AI tools.
 
 ## License
 
-The addon source is licensed under [MIT](LICENSE). The Gradle wrapper retains its Apache 2.0 license notices. FancyNpcs and FancySitula are separate dependencies maintained by [FancyInnovations](https://github.com/FancyInnovations/FancyPlugins).
+[MIT](LICENSE). The Gradle wrapper uses Apache 2.0. FancyNpcs and FancySitula are maintained by [FancyInnovations](https://github.com/FancyInnovations/FancyPlugins) and have their own licenses.
