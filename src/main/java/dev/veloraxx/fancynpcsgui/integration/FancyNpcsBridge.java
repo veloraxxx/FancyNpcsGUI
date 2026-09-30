@@ -261,8 +261,14 @@ public final class FancyNpcsBridge implements Listener {
             packets.createSetEntityDataPacket(entity.getEntityId(), List.of(new EntityData(
                     FS_EntityData.CUSTOM_NAME_VISIBLE, !(entity instanceof Player) && !hidden && !label))).send(viewer);
             previous.put(data.getId(), team);
-            if (entity instanceof Player fake) {
-                FS_GameProfile profile = FS_GameProfile.fromBukkit(data.isMirrorSkin() ? player.getPlayerProfile() : fake.getPlayerProfile());
+            if (entity instanceof Player) {
+                FS_GameProfile profile = data.isMirrorSkin() ? FS_GameProfile.fromBukkit(player.getPlayerProfile())
+                        : new FS_GameProfile(entity.getUniqueId(), entry);
+                var skin = data.getSkinData();
+                if (!data.isMirrorSkin() && skin != null && skin.hasTexture()) {
+                    profile.getProperties().put("textures", new FS_GameProfile.Property("textures",
+                            skin.getTextureValue(), skin.getTextureSignature()));
+                }
                 profile.setUUID(entity.getUniqueId());
                 profile.setName(entry);
                 var info = new FS_ClientboundPlayerInfoUpdatePacket.Entry(entity.getUniqueId(),
