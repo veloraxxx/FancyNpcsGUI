@@ -1,0 +1,36 @@
+name: FancyNpcsGUI
+version: 1.1.0
+main: dev.veloraxx.fancynpcsgui.FancyNpcsGuiPlugin
+api-version: '1.21'
+author: Veloraxx
+description: Unofficial in-game editor for FancyNpcs
+depend: [FancyNpcs]
+commands:
+  npcgui:
+    description: Open the FancyNpcs editor
+    usage: /npcgui
+    permission: fancynpcsgui.use
+permissions:
+  fancynpcsgui.admin:
+    description: Grants all NPC GUI permissions
+    default: op
+    children:
+      fancynpcsgui.use: true
+      fancynpcsgui.create: true
+      fancynpcsgui.edit: true
+      fancynpcsgui.delete: true
+      fancynpcsgui.actions: true
+  fancynpcsgui.use:
+    default: op
+  fancynpcsgui.create:
+    default: op
+    children:
+      fancynpcs.command.npc.copy: true
+  fancynpcsgui.edit:
+    default: op
+    children:
+      fancynpcs.command.npc.skin: true
+  fancynpcsgui.delete:
+    default: op
+  fancynpcsgui.actions:
+    default: op
