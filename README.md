@@ -4,8 +4,6 @@
   <img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg" height="56" alt="Available on Modrinth">
 </a>
 
-(Currently under review – should be available soon)
-
 A GUI for [FancyNpcs](https://modrinth.com/plugin/fancynpcs). Open `/npcgui` to find, create and edit NPCs in-game.
 
 Made by Veloraxx. This is an unofficial addon for FancyNpcs.
